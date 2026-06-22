@@ -1,0 +1,68 @@
+"use client";
+
+import { Plus, Wallet } from "lucide-react";
+import type { ViewId } from "./Sidebar";
+import { clsx } from "@/lib/utils";
+
+interface TopBarProps {
+  view: ViewId;
+  onChange: (v: ViewId) => void;
+  onAdd: () => void;
+}
+
+const titles: Record<ViewId, { title: string; subtitle: string }> = {
+  dashboard: {
+    title: "Dashboard",
+    subtitle: "An overview of your spending and trends.",
+  },
+  expenses: {
+    title: "Expenses",
+    subtitle: "Every transaction, filter it any way you want.",
+  },
+};
+
+export function TopBar({ view, onChange, onAdd }: TopBarProps) {
+  const meta = titles[view];
+  return (
+    <header className="sticky top-4 z-20">
+      <div className="glass-strong rounded-2xl px-4 sm:px-5 py-3 flex items-center gap-3">
+        {/* Mobile logo */}
+        <div className="lg:hidden flex items-center gap-2">
+          <div className="w-9 h-9 rounded-xl bg-ink-900 text-white grid place-items-center">
+            <Wallet className="w-5 h-5" />
+          </div>
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <h1 className="text-[17px] sm:text-lg font-semibold tracking-tight truncate">
+            {meta.title}
+          </h1>
+          <p className="hidden sm:block text-[12.5px] text-ink-500 truncate">{meta.subtitle}</p>
+        </div>
+
+        {/* Mobile view switcher */}
+        <div className="lg:hidden inline-flex rounded-xl border border-ink-200 bg-white/70 p-0.5">
+          {(["dashboard", "expenses"] as const).map((v) => (
+            <button
+              key={v}
+              type="button"
+              onClick={() => onChange(v)}
+              className={clsx(
+                "px-3 py-1.5 text-xs font-medium rounded-lg transition-colors duration-200 cursor-pointer",
+                view === v ? "bg-ink-900 text-white" : "text-ink-600 hover:text-ink-900"
+              )}
+            >
+              {v === "dashboard" ? "Overview" : "List"}
+            </button>
+          ))}
+        </div>
+
+        <button type="button" onClick={onAdd} className="btn-primary">
+          <Plus className="w-4 h-4" />
+          <span className="hidden sm:inline">Add expense</span>
+          <span className="sm:hidden">Add</span>
+        </button>
+      </div>
+    </header>
+  );
+}
