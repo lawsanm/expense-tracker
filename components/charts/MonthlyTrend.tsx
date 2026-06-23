@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import type { Expense } from "@/lib/types";
 import { formatCompactCurrency, formatCurrency } from "@/lib/utils";
+import { useTheme } from "@/lib/theme";
 
 interface MonthlyTrendProps {
   expenses: Expense[];
@@ -21,6 +22,9 @@ interface MonthlyTrendProps {
 
 export function MonthlyTrend({ expenses, months = 6 }: MonthlyTrendProps) {
   const now = new Date();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   const buckets: { key: string; label: string; year: number; month: number; value: number }[] = [];
   for (let i = months - 1; i >= 0; i--) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
@@ -46,28 +50,34 @@ export function MonthlyTrend({ expenses, months = 6 }: MonthlyTrendProps) {
     <div className="h-64">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={buckets} margin={{ top: 10, right: 8, left: -16, bottom: 0 }}>
-          <CartesianGrid stroke="#EEF2F7" vertical={false} />
+          <CartesianGrid
+            stroke={isDark ? "#27272A" : "#EEF2F7"}
+            vertical={false}
+          />
           <XAxis
             dataKey="label"
-            tick={{ fill: "#71717A", fontSize: 12 }}
+            tick={{ fill: isDark ? "#A1A1AA" : "#71717A", fontSize: 12 }}
             tickLine={false}
-            axisLine={{ stroke: "#E4E4E7" }}
+            axisLine={{ stroke: isDark ? "#27272A" : "#E4E4E7" }}
           />
           <YAxis
-            tick={{ fill: "#71717A", fontSize: 12 }}
+            tick={{ fill: isDark ? "#A1A1AA" : "#71717A", fontSize: 12 }}
             tickLine={false}
             axisLine={false}
             tickFormatter={(v) => formatCompactCurrency(Number(v))}
             width={56}
           />
           <Tooltip
-            cursor={{ fill: "rgba(37,99,235,0.06)" }}
+            cursor={{ fill: isDark ? "rgba(59,130,246,0.08)" : "rgba(37,99,235,0.06)" }}
             contentStyle={{
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid #E4E4E7",
+              background: isDark ? "rgba(39,39,42,0.95)" : "rgba(255,255,255,0.95)",
+              border: `1px solid ${isDark ? "#3F3F46" : "#E4E4E7"}`,
               borderRadius: 12,
               fontSize: 12,
-              boxShadow: "0 8px 24px -8px rgba(15,23,42,0.12)",
+              boxShadow: isDark
+                ? "0 8px 24px -8px rgba(0,0,0,0.4)"
+                : "0 8px 24px -8px rgba(15,23,42,0.12)",
+              color: isDark ? "#FAFAFA" : undefined,
             }}
             formatter={(value: number) => [formatCurrency(value), "Total"]}
           />
@@ -75,7 +85,9 @@ export function MonthlyTrend({ expenses, months = 6 }: MonthlyTrendProps) {
             {buckets.map((b) => (
               <Cell
                 key={b.key}
-                fill={b.key === currentKey ? "#2563EB" : "#C7D2FE"}
+                fill={b.key === currentKey
+                  ? (isDark ? "#60A5FA" : "#2563EB")
+                  : (isDark ? "#3F3F46" : "#C7D2FE")}
                 opacity={max === 0 ? 0.3 : 1}
               />
             ))}

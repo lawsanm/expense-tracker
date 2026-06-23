@@ -116,8 +116,8 @@ export function DashboardView({ onAdd }: { onAdd: () => void }) {
         <div className="lg:col-span-3 glass rounded-2xl p-5">
           <div className="flex items-end justify-between mb-3">
             <div>
-              <h2 className="text-[15px] font-semibold tracking-tight">Spending over time</h2>
-              <p className="text-[12.5px] text-ink-500">Total spend by month — current month highlighted</p>
+              <h2 className="text-[15px] font-semibold tracking-tight text-ink-900 dark:text-ink-50">Spending over time</h2>
+              <p className="text-[12.5px] text-ink-500 dark:text-ink-400">Total spend by month — current month highlighted</p>
             </div>
           </div>
           <MonthlyTrend expenses={expenses} />
@@ -126,8 +126,8 @@ export function DashboardView({ onAdd }: { onAdd: () => void }) {
         <div className="lg:col-span-2 glass rounded-2xl p-5">
           <div className="flex items-end justify-between mb-3">
             <div>
-              <h2 className="text-[15px] font-semibold tracking-tight">By category</h2>
-              <p className="text-[12.5px] text-ink-500">Last 30 days · {last30.length} txn</p>
+              <h2 className="text-[15px] font-semibold tracking-tight text-ink-900 dark:text-ink-50">By category</h2>
+              <p className="text-[12.5px] text-ink-500 dark:text-ink-400">Last 30 days · {last30.length} txn</p>
             </div>
           </div>
           <CategoryDonut expenses={last30.length > 0 ? last30 : expenses} />
@@ -137,8 +137,8 @@ export function DashboardView({ onAdd }: { onAdd: () => void }) {
       <section className="glass rounded-2xl p-5">
         <div className="flex items-end justify-between mb-2">
           <div>
-            <h2 className="text-[15px] font-semibold tracking-tight">Recent transactions</h2>
-            <p className="text-[12.5px] text-ink-500">Your 6 most recent expenses</p>
+            <h2 className="text-[15px] font-semibold tracking-tight text-ink-900 dark:text-ink-50">Recent transactions</h2>
+            <p className="text-[12.5px] text-ink-500 dark:text-ink-400">Your 6 most recent expenses</p>
           </div>
           <button type="button" onClick={onAdd} className="btn-ghost text-[13px]">
             + Add new
@@ -146,13 +146,13 @@ export function DashboardView({ onAdd }: { onAdd: () => void }) {
         </div>
         {recent.length === 0 ? (
           <div className="py-12 text-center">
-            <p className="text-sm text-ink-500">No expenses yet — add your first one to get started.</p>
+            <p className="text-sm text-ink-500 dark:text-ink-400">No expenses yet — add your first one to get started.</p>
             <button type="button" onClick={onAdd} className="btn-primary mt-4">
               Add an expense
             </button>
           </div>
         ) : (
-          <div className="divide-y divide-ink-100">
+          <div className="divide-y divide-ink-100 dark:divide-ink-800">
             {recent.map((e) => (
               <ExpenseRow key={e.id} expense={e} />
             ))}

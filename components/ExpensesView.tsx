@@ -86,7 +86,7 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
               />
             </div>
             <div className="flex items-center gap-2">
-              <label htmlFor="from" className="text-[12.5px] text-ink-500 hidden sm:inline">From</label>
+              <label htmlFor="from" className="text-[12.5px] text-ink-500 dark:text-ink-400 hidden sm:inline">From</label>
               <input
                 id="from"
                 type="date"
@@ -94,7 +94,7 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
                 onChange={(e) => setFilters((f) => ({ ...f, from: e.target.value || null }))}
                 className="glass-input rounded-xl px-3 py-2.5 text-sm"
               />
-              <label htmlFor="to" className="text-[12.5px] text-ink-500 hidden sm:inline">To</label>
+              <label htmlFor="to" className="text-[12.5px] text-ink-500 dark:text-ink-400 hidden sm:inline">To</label>
               <input
                 id="to"
                 type="date"
@@ -117,7 +117,7 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
           </div>
 
           <div className="flex items-center gap-1.5 overflow-x-auto -mx-1 px-1 pb-0.5">
-            <span className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-wide text-ink-500 font-semibold shrink-0 mr-1">
+            <span className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-wide text-ink-500 dark:text-ink-400 font-semibold shrink-0 mr-1">
               <Filter className="w-3.5 h-3.5" />
               Category
             </span>
@@ -127,8 +127,8 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
               className={clsx(
                 "shrink-0 rounded-full px-3 py-1.5 text-[12.5px] font-medium border transition-colors duration-200 cursor-pointer",
                 filters.category === "all"
-                  ? "bg-ink-900 text-white border-ink-900"
-                  : "bg-white text-ink-600 border-ink-200 hover:bg-ink-50"
+                  ? "bg-ink-900 dark:bg-ink-100 text-white dark:text-ink-900 border-ink-900 dark:border-ink-100"
+                  : "bg-white dark:bg-ink-800 text-ink-600 dark:text-ink-400 border-ink-200 dark:border-ink-700 hover:bg-ink-50 dark:hover:bg-ink-700"
               )}
             >
               All
@@ -144,8 +144,8 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
                   className={clsx(
                     "shrink-0 rounded-full px-3 py-1.5 text-[12.5px] font-medium border transition-colors duration-200 cursor-pointer flex items-center gap-1.5",
                     active
-                      ? "bg-ink-900 text-white border-ink-900"
-                      : "bg-white text-ink-700 border-ink-200 hover:bg-ink-50"
+                      ? "bg-ink-900 dark:bg-ink-100 text-white dark:text-ink-900 border-ink-900 dark:border-ink-100"
+                      : "bg-white dark:bg-ink-800 text-ink-700 dark:text-ink-300 border-ink-200 dark:border-ink-700 hover:bg-ink-50 dark:hover:bg-ink-700"
                   )}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -159,16 +159,16 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
 
       {/* Summary line */}
       <div className="flex items-center justify-between px-1">
-        <p className="text-[13px] text-ink-600">
-          <span className="font-medium text-ink-900">{filtered.length}</span>{" "}
+        <p className="text-[13px] text-ink-600 dark:text-ink-400">
+          <span className="font-medium text-ink-900 dark:text-ink-100">{filtered.length}</span>{" "}
           {filtered.length === 1 ? "transaction" : "transactions"}
           {activeFilters && expenses.length !== filtered.length && (
-            <span className="text-ink-500"> · filtered from {expenses.length}</span>
+            <span className="text-ink-500 dark:text-ink-500"> · filtered from {expenses.length}</span>
           )}
         </p>
-        <p className="text-[13px] text-ink-600">
+        <p className="text-[13px] text-ink-600 dark:text-ink-400">
           Total{" "}
-          <span className="font-semibold text-ink-900 tabular-nums">{formatCurrency(totalFiltered)}</span>
+          <span className="font-semibold text-ink-900 dark:text-ink-100 tabular-nums">{formatCurrency(totalFiltered)}</span>
         </p>
       </div>
 
@@ -176,11 +176,11 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
       <section className="glass rounded-2xl p-2 sm:p-3">
         {grouped.length === 0 ? (
           <div className="py-16 text-center px-4">
-            <div className="mx-auto w-12 h-12 rounded-2xl bg-ink-100 grid place-items-center text-ink-500 mb-3">
+            <div className="mx-auto w-12 h-12 rounded-2xl bg-ink-100 dark:bg-ink-800 grid place-items-center text-ink-500 dark:text-ink-400 mb-3">
               <Search className="w-5 h-5" />
             </div>
-            <p className="text-sm text-ink-700 font-medium">No expenses match your filters.</p>
-            <p className="text-[12.5px] text-ink-500 mt-1">
+            <p className="text-sm text-ink-700 dark:text-ink-300 font-medium">No expenses match your filters.</p>
+            <p className="text-[12.5px] text-ink-500 dark:text-ink-400 mt-1">
               Try clearing filters or adding a new expense.
             </p>
             <button type="button" onClick={onAdd} className="btn-primary mt-4">
@@ -194,14 +194,14 @@ export function ExpensesView({ onAdd }: { onAdd: () => void }) {
               return (
                 <div key={g.date}>
                   <div className="flex items-baseline justify-between px-3 sm:px-4 pt-3 pb-1.5">
-                    <h3 className="text-[12px] uppercase tracking-wide font-semibold text-ink-500">
+                    <h3 className="text-[12px] uppercase tracking-wide font-semibold text-ink-500 dark:text-ink-400">
                       {formatGroupDate(g.date)}
                     </h3>
-                    <span className="text-[12px] text-ink-500 tabular-nums">
+                    <span className="text-[12px] text-ink-500 dark:text-ink-400 tabular-nums">
                       {formatCurrency(dayTotal)}
                     </span>
                   </div>
-                  <div className="divide-y divide-ink-100/70">
+                  <div className="divide-y divide-ink-100/70 dark:divide-ink-800/70">
                     {g.items.map((e) => (
                       <ExpenseRow
                         key={e.id}

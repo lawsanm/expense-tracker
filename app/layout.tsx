@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ExpensesProvider } from "@/lib/store";
+import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Extracker — Personal Expense Tracker",
@@ -16,9 +17,11 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <ExpensesProvider>{children}</ExpensesProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="transition-colors duration-300">
+        <ThemeProvider>
+          <ExpensesProvider>{children}</ExpensesProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

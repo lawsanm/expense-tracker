@@ -19,9 +19,9 @@ export function StatCard({ label, value, hint, icon: Icon, change, invertChange 
   const hasChange = typeof change === "number" && isFinite(change);
   const up = hasChange && change! > 0;
   const flat = hasChange && Math.abs(change!) < 0.5;
-  const goodColor = "text-emerald-700 bg-emerald-50 border-emerald-100";
-  const badColor = "text-rose-700 bg-rose-50 border-rose-100";
-  const neutralColor = "text-ink-600 bg-ink-100 border-ink-200";
+  const goodColor = "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 border-emerald-100 dark:border-emerald-800/40";
+  const badColor = "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/30 border-rose-100 dark:border-rose-800/40";
+  const neutralColor = "text-ink-600 dark:text-ink-400 bg-ink-100 dark:bg-ink-800 border-ink-200 dark:border-ink-700";
 
   const chipColor = !hasChange || flat
     ? neutralColor
@@ -32,7 +32,7 @@ export function StatCard({ label, value, hint, icon: Icon, change, invertChange 
   return (
     <div className="glass rounded-2xl p-5 flex flex-col gap-3 hover:shadow-glow transition-shadow duration-300">
       <div className="flex items-center justify-between">
-        <div className="w-10 h-10 rounded-xl bg-ink-900 text-white grid place-items-center">
+        <div className="w-10 h-10 rounded-xl bg-ink-900 dark:bg-ink-100 text-white dark:text-ink-900 grid place-items-center">
           <Icon className="w-[18px] h-[18px]" />
         </div>
         {hasChange && (
@@ -54,9 +54,9 @@ export function StatCard({ label, value, hint, icon: Icon, change, invertChange 
         )}
       </div>
       <div>
-        <div className="text-[12.5px] uppercase tracking-wide text-ink-500 font-medium">{label}</div>
-        <div className="mt-1 text-2xl font-semibold tracking-tight tabular-nums">{value}</div>
-        {hint && <div className="mt-1 text-[12.5px] text-ink-500">{hint}</div>}
+        <div className="text-[12.5px] uppercase tracking-wide text-ink-500 dark:text-ink-400 font-medium">{label}</div>
+        <div className="mt-1 text-2xl font-semibold tracking-tight tabular-nums text-ink-900 dark:text-ink-50">{value}</div>
+        {hint && <div className="mt-1 text-[12.5px] text-ink-500 dark:text-ink-400">{hint}</div>}
       </div>
     </div>
   );

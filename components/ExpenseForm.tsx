@@ -88,20 +88,20 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
       className="fixed inset-0 z-50 grid place-items-end sm:place-items-center"
     >
       <div
-        className="absolute inset-0 bg-ink-950/30 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-ink-950/30 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
         aria-hidden
       />
       <form
         onSubmit={handleSubmit}
-        className="relative z-10 w-full sm:max-w-md bg-white sm:rounded-2xl rounded-t-2xl shadow-2xl border border-ink-200 p-5 sm:p-6 animate-fade-in"
+        className="relative z-10 w-full sm:max-w-md bg-white dark:bg-ink-900 sm:rounded-2xl rounded-t-2xl shadow-2xl border border-ink-200 dark:border-ink-700 p-5 sm:p-6 animate-fade-in transition-colors"
       >
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h2 className="text-lg font-semibold tracking-tight">
+            <h2 className="text-lg font-semibold tracking-tight text-ink-900 dark:text-ink-50">
               {initial ? "Edit expense" : "Add expense"}
             </h2>
-            <p className="text-[12.5px] text-ink-500">Log a transaction in seconds.</p>
+            <p className="text-[12.5px] text-ink-500 dark:text-ink-400">Log a transaction in seconds.</p>
           </div>
           <button
             type="button"
@@ -115,11 +115,11 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="amount" className="block text-[12.5px] font-medium text-ink-700 mb-1.5">
+            <label htmlFor="amount" className="block text-[12.5px] font-medium text-ink-700 dark:text-ink-300 mb-1.5">
               Amount
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-500 text-sm">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-500 dark:text-ink-400 text-sm">$</span>
               <input
                 id="amount"
                 ref={amountRef}
@@ -137,7 +137,7 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
           </div>
 
           <div>
-            <label className="block text-[12.5px] font-medium text-ink-700 mb-1.5">Category</label>
+            <label className="block text-[12.5px] font-medium text-ink-700 dark:text-ink-300 mb-1.5">Category</label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {CATEGORIES.map((c) => {
                 const Icon = c.icon;
@@ -151,11 +151,11 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
                     className={clsx(
                       "flex items-center gap-2 rounded-xl border px-2.5 py-2 text-[13px] font-medium transition-colors duration-200 cursor-pointer",
                       active
-                        ? "border-brand bg-brand-50 text-brand-700 ring-2 ring-brand/20"
-                        : "border-ink-200 bg-white text-ink-700 hover:border-ink-300 hover:bg-ink-50"
+                        ? "border-brand bg-brand-50 dark:bg-brand-700/20 text-brand-700 dark:text-brand-400 ring-2 ring-brand/20"
+                        : "border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-800 text-ink-700 dark:text-ink-300 hover:border-ink-300 dark:hover:border-ink-600 hover:bg-ink-50 dark:hover:bg-ink-700"
                     )}
                   >
-                    <span className={clsx("w-6 h-6 rounded-md grid place-items-center", c.bg, c.text)}>
+                    <span className={clsx("w-6 h-6 rounded-md grid place-items-center", c.bg, c.darkBg, c.text)}>
                       <Icon className="w-3.5 h-3.5" />
                     </span>
                     <span className="truncate">{c.label}</span>
@@ -166,7 +166,7 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-[12.5px] font-medium text-ink-700 mb-1.5">
+            <label htmlFor="description" className="block text-[12.5px] font-medium text-ink-700 dark:text-ink-300 mb-1.5">
               Description
             </label>
             <input
@@ -181,7 +181,7 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
           </div>
 
           <div>
-            <label htmlFor="date" className="block text-[12.5px] font-medium text-ink-700 mb-1.5">
+            <label htmlFor="date" className="block text-[12.5px] font-medium text-ink-700 dark:text-ink-300 mb-1.5">
               Date
             </label>
             <input
@@ -196,7 +196,7 @@ export function ExpenseForm({ open, initial, onClose, onSubmit }: ExpenseFormPro
           </div>
 
           {error && (
-            <div role="alert" className="text-[13px] text-rose-700 bg-rose-50 border border-rose-100 rounded-lg px-3 py-2">
+            <div role="alert" className="text-[13px] text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/30 border border-rose-100 dark:border-rose-800/40 rounded-lg px-3 py-2">
               {error}
             </div>
           )}

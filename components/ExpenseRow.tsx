@@ -24,27 +24,27 @@ export function ExpenseRow({ expense, onEdit, onDelete, compact = false }: Expen
   return (
     <div
       className={clsx(
-        "group flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 rounded-xl hover:bg-white/70 transition-colors duration-200",
+        "group flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 rounded-xl hover:bg-white/70 dark:hover:bg-ink-800/70 transition-colors duration-200",
         compact && "px-2 py-2"
       )}
     >
-      <div className={clsx("w-10 h-10 rounded-xl grid place-items-center shrink-0", cat.bg, cat.text)}>
+      <div className={clsx("w-10 h-10 rounded-xl grid place-items-center shrink-0", cat.bg, cat.darkBg, cat.text)}>
         <Icon className="w-[18px] h-[18px]" />
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <p className="font-medium text-ink-900 truncate text-[14.5px]">
+          <p className="font-medium text-ink-900 dark:text-ink-50 truncate text-[14.5px]">
             {expense.description || cat.label}
           </p>
         </div>
-        <div className="mt-0.5 text-[12px] text-ink-500 flex items-center gap-1.5 flex-wrap">
-          <span className={clsx("chip", cat.bg, cat.text)}>{cat.label}</span>
+        <div className="mt-0.5 text-[12px] text-ink-500 dark:text-ink-400 flex items-center gap-1.5 flex-wrap">
+          <span className={clsx("chip", cat.bg, cat.darkBg, cat.text)}>{cat.label}</span>
           <span>·</span>
           <span>{formatDate(expense.date)}</span>
         </div>
       </div>
       <div className="text-right shrink-0">
-        <div className="font-semibold tabular-nums text-ink-900">
+        <div className="font-semibold tabular-nums text-ink-900 dark:text-ink-50">
           −{formatCurrency(expense.amount)}
         </div>
       </div>
@@ -65,7 +65,7 @@ export function ExpenseRow({ expense, onEdit, onDelete, compact = false }: Expen
               type="button"
               aria-label="Delete expense"
               onClick={() => onDelete(expense.id)}
-              className="btn-ghost p-2 hover:text-rose-600 hover:bg-rose-50"
+              className="btn-ghost p-2 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30"
             >
               <Trash2 className="w-4 h-4" />
             </button>
