@@ -64,11 +64,11 @@ export function TopBar({ view, onChange, onAdd }: TopBarProps) {
         <button
           type="button"
           onClick={toggleTheme}
-          className="p-2.5 rounded-xl hover:bg-ink-100 dark:hover:bg-ink-800 transition-colors duration-200 cursor-pointer"
+          className="p-2 rounded-xl border border-ink-200 dark:border-ink-700 bg-white/60 dark:bg-ink-800/60 hover:bg-ink-100 dark:hover:bg-ink-700 transition-colors duration-200 cursor-pointer"
           aria-label="Toggle dark mode"
         >
           {theme === "light" ? (
-            <Moon className="w-[18px] h-[18px] text-ink-500" />
+            <Moon className="w-[18px] h-[18px] text-ink-700" />
           ) : (
             <Sun className="w-[18px] h-[18px] text-amber-400" />
           )}
